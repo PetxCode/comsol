@@ -41,7 +41,8 @@ router.post("/:id/create", verify, cover, async (req, res) => {
 
 router.get("/:id/view", async (req, res) => {
 	try {
-		const getUser = await userModel.findById(req.params.id).populate("brand");
+		const getUser = await userModel.findById(req.params.id).populate({path: "brand",
+			options: { limit: 1 },});
 
 		res.status(200).json({
 			status: "successful",
